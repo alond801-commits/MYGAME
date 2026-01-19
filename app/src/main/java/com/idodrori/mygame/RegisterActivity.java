@@ -1,0 +1,146 @@
+package com.idodrori.mygame;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.idodrori.mygame.modle.User;
+import com.idodrori.mygame.services.DatabaseService;
+
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    private static final String TAG = "RegisterActivity";
+
+
+
+    private EditText etEmail, etPassword, etFName, etLName, etPhone;
+    private Button btnRegister;
+
+
+    DatabaseService databaseService;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_register);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+
+
+        databaseService = DatabaseService.getInstance();
+
+        /// get the views
+        etEmail = findViewById(R.id.etemail);
+        etPassword = findViewById(R.id.etpassword);
+        etFName = findViewById(R.id.etFname);
+        etLName = findViewById(R.id.etlname);
+        etPhone = findViewById(R.id.etphone);
+        btnRegister = findViewById(R.id.btn);
+
+        /// set the click listener
+        btnRegister.setOnClickListener(this);
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == btnRegister.getId()) {
+            Log.d(TAG, "onClick: Register button clicked");
+
+            /// get the input from the user
+            String email = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
+            String fName = etFName.getText().toString();
+            String lName = etLName.getText().toString();
+            String phone = etPhone.getText().toString();
+
+
+            Log.d(TAG, "onClick: Registering user...");
+
+            /// Register user
+            registerUser(fName, lName, phone, email, password);
+
+        }
+    }
+
+
+    /// Register the user
+    private void registerUser(String fname, String lname, String phone, String email, String password) {
+        Log.d(TAG, "registerUser: Registering user...");
+
+
+        /// create a new user object
+        User user = new User("99", fname, lname, email, phone, password);
+
+
+
+
+            /// proceed to create the user
+        createUserInDatabase(user);
+
+    }
+
+    private void createUserInDatabase(User user) {
+        databaseService.createNewUser(user, new DatabaseService.DatabaseCallback<String>() {
+            @Override
+            public void onCompleted(String uid) {
+                Log.d(TAG, "createUserInDatabase: User created successfully");
+                /// save the user to shared preferences
+                user.setId(uid);
+
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                editor.putString("email", user.getEmail());
+                editor.putString("password", user.getPassword());
+
+                editor.commit();
+                Log.d(TAG, "createUserInDatabase: Redirecting to MainActivity");
+                /// Redirect to MainActivity and clear back stack to prevent user from going back to register screen
+                Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                /// clear the back stack (clear history) and start the MainActivity
+                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainIntent);
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                Log.e(TAG, "createUserInDatabase: Failed to create user", e);
+                /// show error message to user
+                Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+                /// sign out the user if failed to register
+
+            }
+        });
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+}
+
+
+

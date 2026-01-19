@@ -1,6 +1,8 @@
 package com.idodrori.mygame;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,28 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void goSignup(View view) {
+
+        /// Redirect to MainActivity and clear back stack to prevent user from going back to register screen
+        Intent mainIntent = new Intent(MainActivity.this, RegisterActivity.class);
+        /// clear the back stack (clear history) and strt the MainActivity
+
+        startActivity(mainIntent);
+    }
+
+    public void goSignin(View view) {
+        Intent mainIntent = new Intent(MainActivity.this, RegisterActivity.class);
+        /// clear the back stack (clear history) and strt the MainActivity
+
+        startActivity(mainIntent);
+
+    }
 }
+
+
+
+
+
+
+

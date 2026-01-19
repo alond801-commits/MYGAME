@@ -13,6 +13,8 @@
         android:layout_height="0dp"
         android:layout_marginBottom="23dp"
         android:text="Sign up"
+
+        android:onClick="goSignup"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +26,8 @@
         android:layout_height="0dp"
         android:layout_marginBottom="175dp"
         android:text="Login"
+
+        android:onClick="goSignin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,205 @@
+package com.idodrori.mygame;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.idodrori.mygame.modle.HairCut;
+import com.idodrori.mygame.services.DatabaseService;
+import com.idodrori.mygame.utils.ImageUtil;
+
+public class AddHairCut extends AppCompatActivity {
+
+
+    private EditText etIname, etIPrice, etISize, etIDetails;
+    private Spinner spIType;
+    private Button btnGallery, btnCamera, btnAddItem;
+    private ImageView ivIPic;
+    private DatabaseService databaseService;
+    private ActivityResultLauncher<Intent> captureImageLauncher;
+    /// Activity result launcher for capturing image from camera
+
+
+    // constant to compare
+    // the activity result code
+    int SELECT_PICTURE = 200;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_add_hair_cut);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        InitViews();
+
+        /// request permission for the camera and storage
+        ImageUtil.requestPermission(this);
+
+        /// get the instance of the database service
+        databaseService = DatabaseService.getInstance();
+
+
+        /// register the activity result launcher for capturing image from camera
+        captureImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
+                        ivIPic.setImageBitmap(bitmap);
+                    }
+                });
+
+
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImageFromGallery();
+
+
+            }
+        });
+
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                captureImageFromCamera();
+
+            }
+        });
+
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String itemName = etIname.getText().toString();
+                String itemDetails = etIDetails.getText().toString();
+                String itemPrice = etIPrice.getText().toString();
+                String itemType = spIType.getSelectedItem().toString();
+                String itemSize = etISize.getText().toString();
+
+
+                String imagePic = ImageUtil.convertTo64Base(ivIPic);
+
+
+                if (itemName.isEmpty() || itemDetails.isEmpty() ||
+                        itemPrice.isEmpty() || itemType.isEmpty() || itemSize.isEmpty()) {
+                    Toast.makeText(AddHairCut.this, "אנא מלא את כל השדות", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddHairCut.this, "המוצר נוסף בהצלחה!", Toast.LENGTH_SHORT).show();
+                }
+                double price = Double.parseDouble(itemPrice);
+                /// generate a new id for the item
+                String id = databaseService.generateHairCutId();
+
+
+                HairCut newItem = new HairCut(id, itemName, price, itemType, itemSize, itemDetails, imagePic);
+
+
+                /// save the item to the database and get the result in the callback
+                databaseService.createNewHairCut(newItem, new DatabaseService.DatabaseCallback<Void>() {
+                    @Override
+                    public void onCompleted(Void object) {
+                        Log.d("TAG", "Item added successfully");
+                        Toast.makeText(AddHairCut.this, "Item added successfully", Toast.LENGTH_SHORT).show();
+                        /// clear the input fields after adding the item for the next item
+                        Log.d("TAG", "Clearing input fields");
+
+                        //  Intent intent = new Intent(AddHairCut.this, AdminActivity.class);
+                        //    startActivity(intent);
+
+
+                    }
+
+                    @Override
+                    public void onFailed(Exception e) {
+                        Log.e("TAG", "Failed to add item", e);
+                        Toast.makeText(AddHairCut.this, "Failed to add food", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    private void InitViews() {
+        etIname = findViewById(R.id.etName);
+        etIPrice = findViewById(R.id.etPrice);
+        etISize = findViewById(R.id.etSize);
+        etIDetails = findViewById(R.id.etDetails);
+        spIType = findViewById(R.id.spTYpe);
+        btnGallery = findViewById(R.id.btnGallery);
+        btnCamera = findViewById(R.id.btnCamare);
+        btnAddItem = findViewById(R.id.BtnAddNewHairCut);
+        ivIPic = findViewById(R.id.ivHairCut);
+    }
+
+
+    /// select image from gallery
+    private void selectImageFromGallery() {
+
+        imageChooser();
+    }
+
+    /// capture image from camera
+    private void captureImageFromCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        captureImageLauncher.launch(takePictureIntent);
+    }
+
+
+    void imageChooser() {
+
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    // this function is triggered when user
+    // selects the image from the imageChooser
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    ivIPic.setImageURI(selectedImageUri);
+                }
+            }
+        }
+    }
+}
+
