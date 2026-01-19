@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "998439366636",
+    "firebase_url": "https://ido-project-7991c-default-rtdb.firebaseio.com",
+    "project_id": "ido-project-7991c",
+    "storage_bucket": "ido-project-7991c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998439366636:android:d4edfa42ac47775e8ddac9",
+        "android_client_info": {
+          "package_name": "com.idodrori.mygame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBubGS60eLHYreQuH11bS8M7SHfNY0KsG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
