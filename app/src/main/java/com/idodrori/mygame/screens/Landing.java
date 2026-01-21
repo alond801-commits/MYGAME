@@ -1,4 +1,4 @@
-package com.idodrori.mygame;
+package com.idodrori.mygame.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.idodrori.mygame.R;
 import com.idodrori.mygame.utils.SharedPreferencesUtil;
 
 public class Landing extends AppCompatActivity {

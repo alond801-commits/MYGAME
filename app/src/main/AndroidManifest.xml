@@ -11,25 +11,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mygame">
         <activity
-            android:name=".Landing"
+            android:name=".utils.HairCutsListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".screens.Landing"
             android:exported="false" />
         <activity
-            android:name=".userListActivity"
+            android:name=".screens.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".screens.userListActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".screens.Login"
             android:exported="false" />
         <activity
-            android:name=".AddHairCut"
+            android:name=".screens.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".screens.AddHairCut"
+            android:exported="false" />
+        <activity
+            android:name=".screens.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

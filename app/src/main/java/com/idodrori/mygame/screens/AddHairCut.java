@@ -1,4 +1,4 @@
-package com.idodrori.mygame;
+package com.idodrori.mygame.screens;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,13 +21,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.idodrori.mygame.R;
 import com.idodrori.mygame.modle.HairCut;
 import com.idodrori.mygame.services.DatabaseService;
 import com.idodrori.mygame.utils.ImageUtil;
 
 public class AddHairCut extends AppCompatActivity {
-
-
     private EditText etIname, etIPrice, etISize, etIDetails;
     private Spinner spIType;
     private Button btnGallery, btnCamera, btnAddItem;
@@ -35,12 +34,7 @@ public class AddHairCut extends AppCompatActivity {
     private DatabaseService databaseService;
     private ActivityResultLauncher<Intent> captureImageLauncher;
     /// Activity result launcher for capturing image from camera
-
-
-    // constant to compare
-    // the activity result code
     int SELECT_PICTURE = 200;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +55,6 @@ public class AddHairCut extends AppCompatActivity {
         /// get the instance of the database service
         databaseService = DatabaseService.getInstance();
 
-
         /// register the activity result launcher for capturing image from camera
         captureImageLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -71,7 +64,6 @@ public class AddHairCut extends AppCompatActivity {
                         ivIPic.setImageBitmap(bitmap);
                     }
                 });
-
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +146,6 @@ public class AddHairCut extends AppCompatActivity {
         ivIPic = findViewById(R.id.ivHairCut);
     }
 
-
     /// select image from gallery
     private void selectImageFromGallery() {
 
@@ -166,7 +157,6 @@ public class AddHairCut extends AppCompatActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         captureImageLauncher.launch(takePictureIntent);
     }
-
 
     void imageChooser() {
 
@@ -201,4 +191,3 @@ public class AddHairCut extends AppCompatActivity {
         }
     }
 }
-

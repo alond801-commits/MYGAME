@@ -1,4 +1,4 @@
-package com.idodrori.mygame;
+package com.idodrori.mygame.screens;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.idodrori.mygame.R;
 import com.idodrori.mygame.modle.User;
 import com.idodrori.mygame.services.DatabaseService;
 

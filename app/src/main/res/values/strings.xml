@@ -1,3 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mygame</string>
+
+    <string-array name="arrTYpe">
+        <item>בחר סוג טיפול</item>
+        <item>תספורת גור</item>
+        <item>תספורת דובי</item>
+        <item>תספורת קלאסית</item>
+        <item>תספורת קיץ</item>
+        <item>תספורת קצרה מאוד</item>
+        <item>תספורת גזעית</item>
+        <item>תספורת תערוכה</item>
+        <item>תספורת היגיינית</item>
+        <item>תספורת ארוכה</item>
+        <item>מקלחת</item>
+        <item>מקלחת + ייבוש</item>
+        <item>שטיפה נגד פרעושים</item>
+        <item>הברשה</item>
+        <item>התרת קשרים</item>
+        <item>ניקוי אוזניים</item>
+        <item>גזיזת ציפורניים</item>
+        <item>ניקוי עיניים</item>
+        <item>טיפול היגייני</item>
+        <item>טיפול מלא (רחצה + תספורת)</item>
+        <item>ניקוי כפות רגליים</item>
+        <item>ניקוי אזור אינטימי</item>
+        <item>ניקוי שיניים</item>
+        <item>ריקון בלוטות אנאליות</item>
+        <item>הברשה קלה</item>
+        <item>בדיקת עור ופרווה</item>
+    </string-array>
 </resources>

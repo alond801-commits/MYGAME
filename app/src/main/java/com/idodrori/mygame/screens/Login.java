@@ -1,4 +1,4 @@
-package com.idodrori.mygame;
+package com.idodrori.mygame.screens;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +11,10 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.idodrori.mygame.R;
 import com.idodrori.mygame.services.DatabaseService;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
-
-
-
     private static final String TAG = "LoginActivity";
 
     private DatabaseService databaseService;

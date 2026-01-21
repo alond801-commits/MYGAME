@@ -35,8 +35,7 @@ public class DatabaseService {
     /// paths for different data types in the database
     /// @see DatabaseService#readData(String)
     private static final String USERS_PATH = "users",
-                                HAIRCUTS_PATH = "haircuts",
-                                CARTS_PATH = "carts";
+                                HAIRCUTS_PATH = "haircuts";
 
     /// callback interface for database operations
     /// @param <T> the type of the object to return
@@ -44,10 +43,10 @@ public class DatabaseService {
     /// @see DatabaseCallback#onFailed(Exception)
     public interface DatabaseCallback<T> {
         /// called when the operation is completed successfully
-        public void onCompleted(T object);
+        void onCompleted(T object);
 
         /// called when the operation fails with an exception
-        public void onFailed(Exception e);
+        void onFailed(Exception e);
     }
 
     /// the instance of this class
@@ -394,80 +393,4 @@ public class DatabaseService {
     }
 
     // endregion hairCut section
-
-    // region cart section
-/*
-    /// create a new cart in the database
-    /// @param cart the cart object to create
-    /// @param callback the callback to call when the operation is completed
-    ///               the callback will receive void
-    ///              if the operation fails, the callback will receive an exception
-    /// @see DatabaseCallback
-    /// @see Cart
-    public void createNewCart(@NotNull final Cart cart, @Nullable final DatabaseCallback<Void> callback) {
-        writeData(CARTS_PATH + "/" + cart.getId(), cart, callback);
-    }
-
-    /// get a cart from the database
-    /// @param cartId the id of the cart to get
-    /// @param callback the callback to call when the operation is completed
-    ///                the callback will receive the cart object
-    ///               if the operation fails, the callback will receive an exception
-    /// @see DatabaseCallback
-    /// @see Cart
-    public void getCart(@NotNull final String cartId, @NotNull final DatabaseCallback<Cart> callback) {
-        getData(CARTS_PATH + "/" + cartId, Cart.class, callback);
-    }
-
-    /// get all the carts from the database
-    /// @param callback the callback to call when the operation is completed
-    ///               the callback will receive a list of cart objects
-    ///
-    public void getCartList(@NotNull final DatabaseCallback<List<Cart>> callback) {
-        getDataList(CARTS_PATH, Cart.class, callback);
-    }
-
-    /// get all the carts of a specific user from the database
-    /// @param uid the id of the user to get the carts for
-    /// @param callback the callback to call when the operation is completed
-    public void getUserCartList(@NotNull String uid, @NotNull final DatabaseCallback<List<Cart>> callback) {
-        getCartList(new DatabaseCallback<>() {
-            @Override
-            public void onCompleted(List<Cart> carts) {
-                carts.removeIf(cart -> !Objects.equals(cart.getUid(), uid));
-                callback.onCompleted(carts);
-            }
-
-            @Override
-            public void onFailed(Exception e) {
-                callback.onFailed(e);
-            }
-        });
-    }
-
-
-    /// generate a new id for a new cart in the database
-    /// @return a new id for the cart
-    /// @see #generateNewId(String)
-    /// @see Cart
-    public String generateCartId() {
-        return generateNewId(CARTS_PATH);
-    }
-
-    /// delete a cart from the database
-    /// @param cartId the id of the cart to delete
-    /// @param callback the callback to call when the operation is completed
-    public void deleteCart(@NotNull final String cartId, @Nullable final DatabaseCallback<Void> callback) {
-        deleteData(CARTS_PATH + "/" + cartId, callback);
-    }
-
-    // endregion cart section
-
 }
-
-
-*/
-
-
-}
-
