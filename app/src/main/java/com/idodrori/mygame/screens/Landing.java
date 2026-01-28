@@ -37,7 +37,7 @@ public class Landing extends AppCompatActivity {
         }
 
         btnGoToLogin = findViewById(R.id.btnGoToLogin);
-        btnGoToRegister = findViewById(R.id.btnGoToRegister);
+        btnGoToRegister = findViewById(R.id.btnRegister);
 
         btnGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override

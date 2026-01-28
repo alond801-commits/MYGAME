@@ -106,7 +106,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 /// save the user data to shared preferences
                 // SharedPreferencesUtil.saveUser(LoginActivity.this, user);
                 /// Redirect to main activity and clear back stack to prevent user from going back to login screen
-                Intent mainIntent = new Intent(Login.this, MainActivity.class);
+                Intent mainIntent = new Intent(Login.this, Useractivity.class);
                 /// Clear the back stack (clear history) and start the MainActivity
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);

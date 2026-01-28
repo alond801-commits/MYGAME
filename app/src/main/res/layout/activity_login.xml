@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@drawable/landingbackground"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,27 +21,29 @@
         android:id="@+id/etFname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="fname"/>
+        android:hint="שם פרטי"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="סיסמא"
         android:inputType="textPassword"
         android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
+        android:layout_width="324dp"
         android:layout_height="wrap_content"
-        android:text="Login"/>
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="התחברות" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
+        android:layout_width="226dp"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginTop="8dp"/>
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="מעבר להרשמה" />
+
 
 </LinearLayout>

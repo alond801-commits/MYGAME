@@ -7,18 +7,18 @@ public class HairCut {
     private String type;
     private String size;
     private String details;
-    private String imageBase64;
+    private String pic;
 
     public HairCut() {}
 
-    public HairCut(String id, String name, double price, String type, String size, String details, String imageBase64) {
+    public HairCut(String id, String name, double price, String type, String size, String details, String pic) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.type = type;
         this.size = size;
         this.details = details;
-        this.imageBase64 = imageBase64;
+        this.pic = pic;
     }
 
     // Getters ו-Setters
@@ -34,6 +34,25 @@ public class HairCut {
     public void setSize(String size) { this.size = size; }
     public String getDetails() { return details; }
     public void setDetails(String details) { this.details = details; }
-    public String getImageBase64() { return imageBase64; }
-    public void setImageBase64(String imageBase64) { this.imageBase64 = imageBase64; }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    @Override
+    public String toString() {
+        return "HairCut{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", size='" + size + '\'' +
+                ", details='" + details + '\'' +
+                ", pic='" + pic + '\'' +
+                '}';
+    }
 }

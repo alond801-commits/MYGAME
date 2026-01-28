@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mygame">
         <activity
-            android:name=".utils.HairCutsListActivity"
+            android:name=".screens.HairCutsListActivity"
             android:exported="false" />
         <activity
             android:name=".screens.Landing"
@@ -27,6 +27,9 @@
             android:exported="false" />
         <activity
             android:name=".screens.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screens.Useractivity"
             android:exported="false" />
         <activity
             android:name=".screens.AddHairCut"

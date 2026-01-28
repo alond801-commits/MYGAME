@@ -38,15 +38,14 @@ public class HairCutAdapter extends RecyclerView.Adapter<HairCutAdapter.HairCutV
         holder.tvType.setText(hairCut.getType());
 
         // שימוש ב-ImageUtil כדי להמיר את ה-Base64 לתמונה
-        if (hairCut.getImageBase64() != null && !hairCut.getImageBase64().isEmpty()) {
-            Bitmap bitmap = ImageUtil.convertFrom64base(hairCut.getImageBase64());
-            if (bitmap != null) {
-                holder.ivImage.setImageBitmap(bitmap);
-            }
-        } else {
+
             // תמונת ברירת מחדל אם אין תמונה
-            holder.ivImage.setImageResource(android.R.drawable.ic_menu_gallery);
+
+        if(hairCut.getPic()!=null) {
+            holder.ivImage.setImageBitmap(ImageUtil.convertFrom64base(hairCut.getPic()));
         }
+
+
     }
 
     @Override
