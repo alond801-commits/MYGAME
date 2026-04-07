@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(User user) {
                         if (user != null) {
-                            navigateTo(MainActivity.class);
+                            navigateTo(Landing.class);
                         } else {
                             // User exists in Prefs but not in Database (e.g., deleted)
                             navigateTo(Landing.class);

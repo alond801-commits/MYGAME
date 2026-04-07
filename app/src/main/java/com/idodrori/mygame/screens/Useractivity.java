@@ -31,4 +31,9 @@ public class Useractivity extends AppCompatActivity {
         Intent intent = new Intent(Useractivity.this, HairCutsListActivity.class);
         startActivity(intent);
     }
+    public void goToaAddHairCut(View view) {
+
+        Intent intent = new Intent(Useractivity.this, AddHairCut.class);
+        startActivity(intent);
+    }
 }

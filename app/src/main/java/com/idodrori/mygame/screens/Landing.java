@@ -30,7 +30,7 @@ public class Landing extends AppCompatActivity {
 
 
         if (SharedPreferencesUtil.isUserLoggedIn(this)) {
-            Intent intent = new Intent(Landing.this, MainActivity.class);
+            Intent intent = new Intent(Landing.this, Landing.class);
             startActivity(intent);
             finish();
             return;
