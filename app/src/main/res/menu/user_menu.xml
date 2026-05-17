@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/menu_haircuts"
+        android:title="תספורות"
+       />
+
+    <item
+        android:id="@+id/menu_add_haircut"
+        android:title="הוסף"
+        />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="פרופיל"
+        />
+
+    <item
+        android:id="@+id/menu_orders"
+        android:title="הזמנות"
+         />
+
+    <item
+        android:id="@+id/menu_basket"
+        android:title="סל"
+        />
+
+
+</menu>

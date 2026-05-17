@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E1CA96"
+    tools:context=".screens.AllOrders">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header_card"
+        android:layout_width="375dp"
+        android:layout_height="85dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="88dp"
+        app:cardBackgroundColor="#9BD1E5"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="346dp"
+            android:layout_height="72dp"
+            android:gravity="center"
+            android:text="הזמנות"
+            android:textColor="#0A0F0D"
+            android:textSize="60dp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <SearchView
+        android:id="@+id/svOrders"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+
+        android:background="@android:color/transparent"
+        android:iconifiedByDefault="false"
+
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="חפש הזמנות..."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.254" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcAllorders"
+        android:layout_width="392dp"
+        android:layout_height="491dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
