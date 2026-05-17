@@ -12,7 +12,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.idodrori.mygame.modle.Cart;
 import com.idodrori.mygame.modle.HairCut;
+import com.idodrori.mygame.modle.Order;
 import com.idodrori.mygame.modle.User;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,8 +36,13 @@ public class DatabaseService {
 
     /// paths for different data types in the database
     /// @see DatabaseService#readData(String)
-    private static final String USERS_PATH = "users",
-                                HAIRCUTS_PATH = "haircuts";
+    private static final String
+            USERS_PATH = "users",
+            HAIRCUTS_PATH = "haircuts",
+            ORDERS_PATH = "orders",
+            USER_ORDERS_PATH = "user_Orders";
+
+
 
     /// callback interface for database operations
     /// @param <T> the type of the object to return
@@ -392,5 +399,115 @@ public class DatabaseService {
         deleteData(HAIRCUTS_PATH + "/" + hairCutId, callback);
     }
 
+    public void updateHairCut(@NotNull final HairCut hairCut, @Nullable final DatabaseCallback<Void> callback) {
+        runTransaction(HAIRCUTS_PATH + "/" + hairCut.getId(), HairCut.class, currectHairCut -> hairCut, new DatabaseCallback<HairCut>() {
+            @Override
+            public void onCompleted(HairCut object) {
+                if (callback != null) {
+                    callback.onCompleted(null);
+                }
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                if (callback != null) {
+                    callback.onFailed(e);
+                }
+            }
+        });
+    }
+
     // endregion hairCut section
+
+
+    // region order section
+
+    public void createNewOrder(@NotNull final Order order, @Nullable final DatabaseCallback<Void> callback) {
+        writeData(ORDERS_PATH + "/" + order.getOrderId(), order, callback);
+    }
+    public void getOrder(@NotNull final String orderId, @NotNull final DatabaseCallback<Order> callback) {
+        getData(ORDERS_PATH + "/" + orderId, Order.class, callback);
+    }
+
+    public void getOrderList(@NotNull final DatabaseCallback<List<Order>> callback) {
+        getDataList(ORDERS_PATH, Order.class, callback);
+    }
+
+    public String generateOrderId() {
+        return generateNewId(ORDERS_PATH);
+    }
+
+    public void deleteOrder(@NotNull final String orderId, @Nullable final DatabaseCallback<Void> callback) {
+        deleteData(ORDERS_PATH + "/" + orderId, callback);
+    }
+
+    public void updateOrder(@NotNull final Order order, @Nullable final DatabaseCallback<Void> callback) {
+        runTransaction(ORDERS_PATH + "/" + order.getOrderId(), Order.class, currectorder -> order, new DatabaseCallback<Order>() {
+            @Override
+            public void onCompleted(Order object) {
+                if (callback != null) {
+                    callback.onCompleted(null);
+                }
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                if (callback != null) {
+                    callback.onFailed(e);
+                }
+            }
+        });
+    }
+
+    // endregion Order section
+
+    // region cart section
+
+    public void getCart(@NotNull final String userId, @NotNull final DatabaseCallback<Cart> callback) {
+        getData(USERS_PATH + "/" + userId + "/myCart", Cart.class, callback);
+    }
+
+    public void updateCart(@NotNull final Cart cart, @NotNull final String userId, @Nullable final DatabaseCallback<Void> callback) {
+        writeData(USERS_PATH + "/" + userId + "/myCart", cart, callback);
+    }
+
+
+    // endregion cart section
+
+    // region user orders section
+
+    public void createNewUserOrder(@NotNull final Order order, @Nullable final DatabaseCallback<Void> callback) {
+        writeData(USER_ORDERS_PATH + "/" + order.getOrderId(), order, callback);
+    }
+    public void getUserOrders(@NotNull final String orderId, @NotNull final DatabaseCallback<List<Order>> callback) {
+        getDataList(USER_ORDERS_PATH + "/" + orderId, Order.class, callback);
+    }
+
+    public void getUserOrderList(@NotNull final DatabaseCallback<List<Order>> callback) {
+        getDataList(USER_ORDERS_PATH, Order.class, callback);
+    }
+
+    public void deleteUserOrder(@NotNull final String userId, @Nullable final DatabaseCallback<Void> callback) {
+        deleteData(USER_ORDERS_PATH + "/" + userId, callback);
+    }
+
+    public void updateUserOrder(@NotNull final Order order, @Nullable final DatabaseCallback<Void> callback) {
+        runTransaction(USER_ORDERS_PATH + "/" + order.getUser().getId(), Order.class, currectorder -> order, new DatabaseCallback<Order>() {
+            @Override
+            public void onCompleted(Order object) {
+                if (callback != null) {
+                    callback.onCompleted(null);
+                }
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                if (callback != null) {
+                    callback.onFailed(e);
+                }
+            }
+        });
+    }
+
+    // endregion user orders section
 }

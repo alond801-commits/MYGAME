@@ -124,7 +124,7 @@ public class Shopping_basket extends AppCompatActivity implements View.OnClickLi
         Order order = new Order(orderId, cart.getHairCuts(), cart.getTotalPrice(), "new", user, 0);
 
         order.setTimestamp(System.currentTimeMillis());
-        databaseService.createNewOreder(order, new DatabaseService.DatabaseCallback<Void>() {
+        databaseService.createNewOrder(order, new DatabaseService.DatabaseCallback<Void>() {
             @Override
             public void onCompleted(Void object) {
                 Toast.makeText(Shopping_basket.this, "הזמנה נשמרה!", Toast.LENGTH_SHORT).show();

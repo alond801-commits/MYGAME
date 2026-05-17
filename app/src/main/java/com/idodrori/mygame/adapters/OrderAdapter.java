@@ -30,11 +30,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         void onLongOrderClick(Order order);
     }
 
-
-
-
-
-
     private final OrderAdapter.OnOrderClickListener onOrderClickListener;
 
     List<Order> orderList;
@@ -76,17 +71,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
 
 
-        HairCutAdapter adapter = new HairCutAdapter(order.getHairCuts(), new HairCutAdapter.OnHairCutClickListener() {
-            @Override
-            public void onHairCutClick(HairCut hairCut) {
-
-            }
-
-            @Override
-            public void onLongHairCutClick(HairCut hairCut) {
-
-            }
-        });
+        HairCutAdapter adapter = new HairCutAdapter(order.getHairCuts());
 
 
         holder.rcOrderItems.setAdapter(adapter);

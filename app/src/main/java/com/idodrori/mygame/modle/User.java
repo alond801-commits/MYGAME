@@ -1,5 +1,7 @@
 package com.idodrori.mygame.modle;
 
+import com.google.firebase.database.Exclude;
+
 public class User {
 
     protected String id;
@@ -24,6 +26,15 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+    public User(User otherUser) {
+        this.id = otherUser.id;
+        this.fname = otherUser.fname;
+        this.lname = otherUser.lname;
+        this.email = otherUser.email;
+        this.phone = otherUser.phone;
+        this.password = otherUser.password;
     }
 
     public String getId() {
@@ -84,5 +95,10 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Exclude
+    public String getFullName() {
+        return this.fname + " " + this.lname;
     }
 }

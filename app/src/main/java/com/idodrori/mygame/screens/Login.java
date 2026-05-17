@@ -17,6 +17,8 @@ import com.idodrori.mygame.services.DatabaseService;
 public class Login extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
 
+    public static boolean isAdmin = false;
+
     private DatabaseService databaseService;
     private EditText etEmail, etPassword;
     private Button btnLogin;
@@ -68,8 +70,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             if (email.equals(ADMINEMAIL) && password.equals(ADMINPASS)) {
                 Log.d(TAG, "user is admin");
-           //     Intent registerIntent = new Intent(Login.this, AdminMainActivity.class);
-          //      startActivity(registerIntent);
+                isAdmin = true;
+//                Intent registerIntent = new Intent(Login.this, AdminMainActivity.class);
+//                startActivity(registerIntent);
             }
             else {
                 /// log the email and password

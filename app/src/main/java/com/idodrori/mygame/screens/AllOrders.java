@@ -71,7 +71,7 @@ public class AllOrders extends AppCompatActivity {
                             order.setDateHairCut(System.currentTimeMillis());
                             orderAdapter.notifyDataSetChanged();
 
-                            databaseService.updateOreder(order, new DatabaseService.DatabaseCallback<Void>() {
+                            databaseService.updateOrder(order, new DatabaseService.DatabaseCallback<Void>() {
                                 @Override
                                 public void onCompleted(Void object) {
 
@@ -105,7 +105,7 @@ public class AllOrders extends AppCompatActivity {
         });
         rcAllordera.setAdapter(orderAdapter);
 
-        databaseService.getAllOrders(new DatabaseService.DatabaseCallback<List<Order>>() {
+        databaseService.getOrderList(new DatabaseService.DatabaseCallback<List<Order>>() {
             @Override
             public void onCompleted(List<Order> object) {
                 orders.clear();
