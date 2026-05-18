@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -190,4 +192,50 @@ public class AddHairCut extends AppCompatActivity {
             }
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.admin_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.menu_add_haircut) {
+
+            startActivity(new Intent(
+                    AddHairCut.this,
+                    AddHairCut.class));
+        }
+
+        else if (id == R.id.menu_users) {
+
+            startActivity(new Intent(
+                    AddHairCut.this,
+                    UsersListActivity.class));
+        }
+
+        else if (id == R.id.menu_haircuts) {
+
+            startActivity(new Intent(
+                    AddHairCut.this,
+                    HairCutsListActivity.class));
+        }
+
+        else if (id == R.id.menu_orders) {
+
+            startActivity(new Intent(
+                    AddHairCut.this,
+                    EditHairCut.class));
+        }
+
+        return true;
+    }
+
 }

@@ -3,6 +3,8 @@ package com.idodrori.mygame.screens;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -89,5 +91,46 @@ public class HairCutsListActivity extends AppCompatActivity {
                 }
             });
         }
+
+    @Override
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user_menu, menu);
+        return true;
+    }
+
+    @Override
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.menu_haircuts) {
+            Toast.makeText(this, "תספורות", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.menu_add_haircut) {
+            Toast.makeText(this, "הוסף", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.menu_profile) {
+            Toast.makeText(this, "פרופיל", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.menu_orders) {
+            Toast.makeText(this, "הזמנות", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.menu_basket) {
+            Toast.makeText(this, "סל", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     }
