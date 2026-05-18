@@ -47,6 +47,6 @@ public class AdminActivity extends AppCompatActivity {
 
     public void goAllOrders(View view) {
         Intent intent = new Intent(AdminActivity.this, AllOrders.class);
-        startActivity(intent);
+       startActivity(intent);
     }
 }

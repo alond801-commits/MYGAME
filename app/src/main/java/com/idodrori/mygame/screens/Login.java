@@ -15,21 +15,17 @@ import com.idodrori.mygame.R;
 import com.idodrori.mygame.services.DatabaseService;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
+    public static final String MyPREFERENCES = "MyPrefs";
+    static final String ADMINEMAIL = "ido@gmail.com";
+    static final String ADMINPASS = "1234ido";
     private static final String TAG = "LoginActivity";
-
     public static boolean isAdmin = false;
-
+    SharedPreferences sharedpreferences;
+    Button btnRegister;
     private DatabaseService databaseService;
     private EditText etEmail, etPassword;
     private Button btnLogin;
-
-    public static final String MyPREFERENCES = "MyPrefs" ;
-
-    static final String ADMINEMAIL = "idodrori29@gmail.com";
-    static final String ADMINPASS = "adminido29";
-    SharedPreferences sharedpreferences;
-    Button  btnRegister;
-    private String email,password;
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +44,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnRegister = findViewById(R.id.btnRegister);
 
 
-
-         email = sharedpreferences.getString("email", "");
+        email = sharedpreferences.getString("email", "");
         password = sharedpreferences.getString("password", "");
         etEmail.setText(email);
         etPassword.setText(password);
@@ -65,38 +60,39 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Log.d(TAG, "onClick: Login button clicked");
 
             /// get the email and password entered by the user
-             email = etEmail.getText().toString();
-             password = etPassword.getText().toString();
+            email = etEmail.getText().toString();
+            password = etPassword.getText().toString();
 
-            if (email.equals(ADMINEMAIL) && password.equals(ADMINPASS)) {
-                Log.d(TAG, "user is admin");
-                isAdmin = true;
-//                Intent registerIntent = new Intent(Login.this, AdminMainActivity.class);
-//                startActivity(registerIntent);
-            }
-            else {
-                /// log the email and password
-                Log.d(TAG, "onClick: Email: " + email);
-                Log.d(TAG, "onClick: Password: " + password);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
 
-                Log.d(TAG, "onClick: Validating input...");
-                /// Validate input
-                Log.d(TAG, "onClick: Logging in user...");
+            editor.putString("email", email);
+            editor.putString("password", password);
 
-                /// Login user
-                loginUser(email, password);
-            }
+            editor.commit();
+
+
+            /// log the email and password
+            Log.d(TAG, "onClick: Email: " + email);
+            Log.d(TAG, "onClick: Password: " + password);
+
+            Log.d(TAG, "onClick: Validating input...");
+            /// Validate input
+            Log.d(TAG, "onClick: Logging in user...");
+
+            /// Login user
+            loginUser(email, password);
         } else if (v.getId() == btnRegister.getId()) {
             /// Navigate to Register Activity
             Intent registerIntent = new Intent(Login.this, RegisterActivity.class);
             startActivity(registerIntent);
         }
     }
+
     private void loginUser(String email, String password) {
         databaseService.LoginUser(email, password, new DatabaseService.DatabaseCallback<String>() {
             /// Callback method called when the operation is completed
             @Override
-            public void onCompleted(String  uid) {
+            public void onCompleted(String uid) {
                 Log.d(TAG, "onCompleted: User logged in: " + uid.toString());
 
 
@@ -106,13 +102,27 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 editor.putString("password", password);
 
                 editor.commit();
-                /// save the user data to shared preferences
-                // SharedPreferencesUtil.saveUser(LoginActivity.this, user);
-                /// Redirect to main activity and clear back stack to prevent user from going back to login screen
-                Intent mainIntent = new Intent(Login.this, Useractivity.class);
-                /// Clear the back stack (clear history) and start the MainActivity
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(mainIntent);
+
+
+                if (email.equals(ADMINEMAIL) && password.equals(ADMINPASS)) {
+                    Log.d(TAG, "user is admin");
+
+
+                    isAdmin = true;
+
+                    Intent registerIntent = new Intent(Login.this, AdminActivity.class);
+                    startActivity(registerIntent);
+                } else {
+
+                    isAdmin = false;
+                    /// save the user data to shared preferences
+                    // SharedPreferencesUtil.saveUser(LoginActivity.this, user);
+                    /// Redirect to main activity and clear back stack to prevent user from going back to login screen
+                    Intent mainIntent = new Intent(Login.this, Useractivity.class);
+                    /// Clear the back stack (clear history) and start the MainActivity
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainIntent);
+                }
             }
 
             @Override
@@ -135,6 +145,3 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onPointerCaptureChanged(hasCapture);
     }
 }
-
-
-

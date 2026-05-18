@@ -7,19 +7,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.idodrori.mygame.R;
 import com.idodrori.mygame.modle.HairCut;
 import com.idodrori.mygame.utils.ImageUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HairCutAdapter extends RecyclerView.Adapter<HairCutAdapter.HairCutViewHolder> {
-
+    private final OnHairCutClickListener onHairCutClickListener;
     private List<HairCut> hairCutList;
 
-    public HairCutAdapter(List<HairCut> hairCutList) {
+    public HairCutAdapter(@Nullable final OnHairCutClickListener onHairCutClickListener) {
+        hairCutList = new ArrayList<>();
+        this.onHairCutClickListener = onHairCutClickListener;
+    }
+
+    public HairCutAdapter(List<HairCut> hairCutList, OnHairCutClickListener onHairCutClickListener) {
         this.hairCutList = hairCutList;
+        this.onHairCutClickListener = onHairCutClickListener;
     }
 
     @NonNull
@@ -39,11 +47,25 @@ public class HairCutAdapter extends RecyclerView.Adapter<HairCutAdapter.HairCutV
 
         // שימוש ב-ImageUtil כדי להמיר את ה-Base64 לתמונה
 
-            // תמונת ברירת מחדל אם אין תמונה
+        // תמונת ברירת מחדל אם אין תמונה
 
-        if(hairCut.getPic()!=null) {
+        if (hairCut.getPic() != null) {
             holder.ivImage.setImageBitmap(ImageUtil.convertFrom64base(hairCut.getPic()));
         }
+
+
+        holder.itemView.setOnClickListener(v -> {
+            if (onHairCutClickListener != null) {
+                onHairCutClickListener.onHairCutClick(hairCut);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (onHairCutClickListener != null) {
+                onHairCutClickListener.onLongHairCutClick(hairCut);
+            }
+            return true;
+        });
 
 
     }
@@ -51,6 +73,12 @@ public class HairCutAdapter extends RecyclerView.Adapter<HairCutAdapter.HairCutV
     @Override
     public int getItemCount() {
         return hairCutList.size();
+    }
+
+    public interface OnHairCutClickListener {
+        void onHairCutClick(HairCut hairCut);
+
+        void onLongHairCutClick(HairCut hairCut);
     }
 
     public static class HairCutViewHolder extends RecyclerView.ViewHolder {
@@ -65,4 +93,5 @@ public class HairCutAdapter extends RecyclerView.Adapter<HairCutAdapter.HairCutV
             ivImage = itemView.findViewById(R.id.ivItemImage);
         }
     }
+
 }

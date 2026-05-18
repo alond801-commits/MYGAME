@@ -10,32 +10,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mygame">
-        <activity
-            android:name=".screens.HairCutsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.Landing"
-            android:exported="false" />
-        <activity
-            android:name=".screens.MainActivity"
-            android:exported="false" />
+
+
+        <activity android:name=".screens.AdminActivity" android:exported="false"/>
+        <activity android:name=".screens.UserProfileActivity" android:exported="false"/>
+        <activity android:name=".screens.AllOrders" android:exported="false"/>
+        <activity android:name=".screens.EditProfile" android:exported="false"/>
+        <activity android:name=".screens.HairCutProfileActivity" android:exported="false"/>
+        <activity android:name=".screens.EditHairCut" android:exported="false"/>
+        <activity android:name=".screens.HairCutsListActivity" android:exported="false"/>
+        <activity android:name=".screens.Useractivity" android:exported="false"/>
+        <activity android:name=".screens.Shopping_basket" android:exported="false"/>
+        <activity android:name=".screens.UserOrders" android:exported="false"/>
+        <activity android:name=".screens.Login" android:exported="false"/>
+        <activity android:name=".screens.RegisterActivity" android:exported="false"/>
+        <activity android:name=".screens.UsersListActivity" android:exported="false"/>
+        <activity android:name=".screens.AddHairCut" android:exported="false"/>
+
+
+
         <activity
             android:name=".screens.userListActivity"
             android:exported="false" />
+
         <activity
-            android:name=".screens.Login"
-            android:exported="false" />
-        <activity
-            android:name=".screens.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.Useractivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.AddHairCut"
-            android:exported="false" />
-        <activity
-            android:name=".screens.SplashActivity"
+            android:name=".screens.Landing"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

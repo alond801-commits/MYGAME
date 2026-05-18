@@ -71,7 +71,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
 
 
-        HairCutAdapter adapter = new HairCutAdapter(order.getHairCuts());
+        HairCutAdapter adapter = new HairCutAdapter(order.getHairCuts(), new HairCutAdapter.OnHairCutClickListener() {
+            @Override
+            public void onHairCutClick(HairCut hairCut) {
+
+            }
+
+            @Override
+            public void onLongHairCutClick(HairCut hairCut) {
+
+            }
+        });
 
 
         holder.rcOrderItems.setAdapter(adapter);

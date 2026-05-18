@@ -29,12 +29,8 @@ public class Landing extends AppCompatActivity {
         });
 
 
-        if (SharedPreferencesUtil.isUserLoggedIn(this)) {
-            Intent intent = new Intent(Landing.this, Landing.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+
+
 
         btnGoToLogin = findViewById(R.id.btnGoToLogin);
         btnGoToRegister = findViewById(R.id.btnRegister);
