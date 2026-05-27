@@ -1,153 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dog_background"
     tools:context=".screens.EditHairCut">
 
-    <LinearLayout
+    <!-- שכבה כהה -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent"
+        android:background="#66000000" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="עריכת תספורת  🐾"
-            android:textColor="#2D3436"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="80dp"
-            app:cardElevation="4dp">
-
-            <ImageView
-                android:id="@+id/ivHairCutEdit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#E1E1E1"
-                android:scaleType="centerCrop"
-                android:src="@android:drawable/ic_menu_camera" />
-        </androidx.cardview.widget.CardView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <Button
-                android:id="@+id/btnCamareEdit"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="צלם תמונה"
-                android:textColor="#0984E3"
-                app:icon="@android:drawable/ic_menu_camera" />
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="עריכת תספורת 🐾"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnGalleryEdit"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="מהגלריה"
-                android:textColor="#0984E3"
-                app:icon="@android:drawable/ic_menu_gallery" />
-        </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="80dp"
+                app:cardElevation="6dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp">
+                <ImageView
+                    android:id="@+id/ivHairCutEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#E1E1E1"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_camera" />
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/etNameEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:hint="שם התספורת (למשל: תספורת קיץ)"
-                    android:inputType="text"
-                    android:padding="12dp"
-                    android:textDirection="rtl" />
-
-                <EditText
-                    android:id="@+id/etPriceEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:hint="מחיר (₪)"
-                    android:inputType="numberDecimal"
-                    android:padding="12dp"
-                    android:textDirection="rtl" />
-
-                <EditText
-                    android:id="@+id/etSizeEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:hint="גודל הכלב (קטן/בינוני/גדול)"
-                    android:inputType="text"
-                    android:padding="12dp"
-                    android:textDirection="rtl" />
-
-                <TextView
+                <Button
+                    android:id="@+id/btnCamareEdit"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="סוג תספורת:"
-                    android:textSize="14sp" />
+                    android:layout_marginEnd="8dp"
+                    android:text="צלם תמונה"
+                    android:textColor="#FFFFFF"
+                    app:icon="@android:drawable/ic_menu_camera" />
 
-                <Spinner
-                    android:id="@+id/spTYpeEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp" />
-
-                <EditText
-                    android:id="@+id/etDetailsEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="top"
-                    android:hint="פרטים נוספים..."
-                    android:inputType="textMultiLine"
-                    android:padding="12dp"
-                    android:textDirection="rtl" />
-
+                <Button
+                    android:id="@+id/btnGalleryEdit"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="מהגלריה"
+                    android:textColor="#FFFFFF"
+                    app:icon="@android:drawable/ic_menu_gallery" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/BtnAddNewHairCutEdit"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="#00B894"
-            android:text="עדכן במאגר"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="12dp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <EditText
+                        android:id="@+id/etNameEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#FFFFFF"
+                        android:hint="שם התספורת (למשל: תספורת קיץ)"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textDirection="rtl" />
+
+                    <EditText
+                        android:id="@+id/etPriceEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#FFFFFF"
+                        android:hint="מחיר (₪)"
+                        android:inputType="numberDecimal"
+                        android:padding="12dp"
+                        android:textDirection="rtl" />
+
+                    <EditText
+                        android:id="@+id/etSizeEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#FFFFFF"
+                        android:hint="גודל הכלב (קטן/בינוני/גדול)"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textDirection="rtl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="סוג תספורת:"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <Spinner
+                        android:id="@+id/spTYpeEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#FFFFFF" />
+
+                    <EditText
+                        android:id="@+id/etDetailsEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="#FFFFFF"
+                        android:gravity="top"
+                        android:hint="פרטים נוספים..."
+                        android:inputType="textMultiLine"
+                        android:padding="12dp"
+                        android:textDirection="rtl" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/BtnAddNewHairCutEdit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#00B894"
+                android:text="עדכן במאגר"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
